@@ -1,0 +1,23 @@
+@media only screen and (max-width: 1400px) {
+
+    /*Small smartphones [768px -> 1400px]*/
+    .carousel-caption {
+        bottom: 9.25rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    /*Small smartphones [576px -> 768px]*/
+    .carousel-caption {
+        bottom: 4.25rem;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+
+    /*Small smartphones [325px -> 576px]*/
+    .carousel-caption {
+        bottom: 0.25rem;
+    }
+}
