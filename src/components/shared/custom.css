@@ -1,3 +1,23 @@
+.primary-color {
+    background-color: #686666;
+    /* font-family: 'Times New Roman', Times, serif; */
+}
+
+.secondary-color {
+    background-color: #adabab;
+    /* font-family: 'Times New Roman', Times, serif; */
+}
+
+.icon-style {
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    border-radius: 50%;
+    font-size: 25px;
+    margin-left: 11px;
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 1400px) {
 
     /*Small smartphones [768px -> 1400px]*/

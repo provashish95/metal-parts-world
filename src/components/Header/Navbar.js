@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Navbar.css';
+import '../shared/custom.css';
 
 const Navbar = () => {
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark  navbar-style ">
+        <nav className="navbar navbar-expand-lg navbar-dark  primary-color ">
             <div className="container">
 
                 <Link to='/' className="navbar-brand fs-2">Metal Parts World</Link>

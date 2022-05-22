@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = () => {
     let date = new Date().getFullYear();
     return (
-        <footer className='navbar-style'>
+        <footer className='primary-color'>
             <section className='container py-3'>
                 <div className="row py-5 g-5">
                     <div className="col-sm-12 col-md-6 col-lg-4 ">
