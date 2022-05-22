@@ -1,8 +1,22 @@
-import React from 'react';
+import { signOut } from 'firebase/auth';
+import React, { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import auth from '../../firebase.init';
 import '../shared/custom.css';
+import Loading from '../shared/Loading';
+
 
 const Navbar = () => {
+    const [user] = useAuthState(auth);
+
+
+
+    const handleSignOut = () => {
+        signOut(auth);
+    }
+
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark  primary-color ">
             <div className="container">
@@ -17,32 +31,20 @@ const Navbar = () => {
                         <li className="nav-item">
                             <Link className="nav-link" to="/home">HOME</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/home">HOME</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/home">HOME</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/home">HOME</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/home">HOME</Link>
-                        </li>
-                        <li className="nav-item dropdown">
-                            <button className="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Enable body scrolling</button>
-                            {/* offcanvas...start */}
-                            {/* <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><Link className="dropdown-item" to="/">Action</Link></li>
-                                <li><Link className="dropdown-item" to="/">Another action</Link></li>
 
-                                <li><Link className="dropdown-item" to="/">Something else here</Link></li>
-                            </ul> */}
-                        </li>
                     </ul>
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <Link className="nav-link" to="/login">LOGIN</Link>
+
+                        </li>
+                        <li className="nav-item">
+                            {
+                                user ? <Link onClick={handleSignOut} className="nav-link" to="/login">LOG OUT</Link>
+                                    :
+                                    <Link className="nav-link" to="/login">LOGIN</Link>
+                            }
+
+
                         </li>
                     </ul>
                 </div>

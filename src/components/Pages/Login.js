@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useAuthState, useCreateUserWithEmailAndPassword, useSendPasswordResetEmail, useSignInWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword, useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { toast } from 'react-toastify';
+import auth from '../../firebase.init';
 import Loading from '../shared/Loading';
 import SocialLogin from './SocialLogin';
-import auth from '../../firebase.init';
-import { toast } from 'react-toastify';
 
 const Login = () => {
-
+    const [user, loading] = useAuthState(auth);
     const [agree, setAgree] = useState(false);
     const [userError, setUserError] = useState(' ');
+    const nameRef = useRef("");
     const emailRef = useRef("");
     const passwordRef = useRef("");
     const confirmPasswordRef = useRef("");
@@ -20,21 +21,23 @@ const Login = () => {
         registerUser,
         registerLoading,
         registerError,
-    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+    ] = useCreateUserWithEmailAndPassword(auth);
     const [
         signInWithEmailAndPassword,
         loginUser,
         loginLoading,
         loginError,
     ] = useSignInWithEmailAndPassword(auth);
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
     const [sendPasswordResetEmail, resetSending, resetError] = useSendPasswordResetEmail(auth);
     let from = location.state?.from?.pathname || "/";
     let errorElement;
 
 
     //registration here..............
-    const handleRegister = (event) => {
+    const handleRegister = async (event) => {
         event.preventDefault();
+        const name = nameRef.current.value;
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         const confirmPassword = confirmPasswordRef.current.value;
@@ -45,17 +48,18 @@ const Login = () => {
             setUserError('Password not matched');
         } else {
             setUserError('')
-            createUserWithEmailAndPassword(email, password)
-            event.target.reset();
+            await createUserWithEmailAndPassword(email, password)
+            await updateProfile({ displayName: name });
         }
 
     }
+
     useEffect(() => {
-        if (registerUser) {
+        if (registerUser && user) {
 
-
+            //navigate(from, { replace: true });
         }
-    }, [registerUser]);
+    }, [registerUser, from, navigate, user]);
     //registration here..............
 
 
@@ -71,10 +75,9 @@ const Login = () => {
     // -----------token -------------
     useEffect(() => {
         if (loginUser) {
-
-
+            navigate(from, { replace: true });
         }
-    }, [loginUser]);
+    }, [loginUser, from, navigate]);
     // -----------token -------------
     //login here...........
 
@@ -91,16 +94,19 @@ const Login = () => {
     }
 
     //firebase error here........
-    if (registerError || loginError || resetError) {
-        errorElement = <p className='text-danger '>Error: {registerError?.message || loginError?.message || resetError?.message}</p>
+    if (registerError || loginError || resetError || updateError) {
+        errorElement = <p className='text-danger '>Error: {registerError?.message || loginError?.message || resetError?.message || updateError?.message}</p>
     }
     //loading here..........
-    if (registerLoading || loginLoading || resetSending) {
+    if (registerLoading || loginLoading || resetSending || updating || loading) {
         return <Loading></Loading>
     }
 
+
+
     return (
         <div className="container">
+            <p>{user?.displayName}</p>
             <div className="row  my-5 w-50 mx-auto width-sizing">
                 <h5 className='text-center mb-5 text-color'>{agree ? "Registration" : "Login"}</h5>
                 <div className="col">
@@ -109,7 +115,7 @@ const Login = () => {
                             <>
                                 <form onSubmit={handleRegister} >
                                     <div className="mb-3">
-                                        <input type="text" className="w-100 rounded input-style py-2 px-2" id="exampleInputName" placeholder='Your Name' required />
+                                        <input type="text" ref={nameRef} className="w-100 rounded input-style py-2 px-2" id="exampleInputName" placeholder='Your Name' required />
                                     </div>
                                     <div className="mb-3">
                                         <input type="email" ref={emailRef} name="email" className="w-100 rounded input-style py-2 px-2" id="exampleInputEmail" placeholder='Your Email' required />
@@ -125,7 +131,7 @@ const Login = () => {
                                         <input type="checkbox" className="form-check-input" id="exampleCheck1" />
                                         <label className="form-check-label text-color" htmlFor="exampleCheck1">Agree terms & condition</label>
                                     </div>
-                                    <button type="submit" className='btn  btn-style w-50 mx-auto d-block mb-5'>Register</button>
+                                    <button type="submit" className='btn  secondary-color w-50 mx-auto d-block mb-5'>Register</button>
                                     {
                                         agree ? " " : errorElement
                                     }
@@ -141,7 +147,7 @@ const Login = () => {
                                         <input type="password" ref={passwordRef} name="password" className="w-100 rounded input-style py-2 px-2" id="exampleInputPassword1" placeholder='Password' required />
                                     </div>
                                     {errorElement}
-                                    <button type="submit" className='btn btn-style w-50 mx-auto d-block mb-5'>Login</button>
+                                    <button type="submit" className='btn secondary-color w-50 mx-auto d-block mb-5'>Login</button>
                                 </form>
                             </>
                     }

@@ -33,7 +33,7 @@ const SocialLogin = () => {
             </div>
             {errorElement}
             <div>
-                <button onClick={() => signInWithGoogle()} className='btn secondary-color w-25 mx-auto d-block my-2 py-2'>
+                <button onClick={() => signInWithGoogle()} className='btn secondary-color w-50 mx-auto d-block my-2 py-2'>
                     <span className='me-2 fs-5'><i className="fa-brands fa-google"></i></span>
                     <span>Google Login </span>
                 </button>
