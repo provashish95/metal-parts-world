@@ -1,163 +1,136 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useAuthState, useCreateUserWithEmailAndPassword, useSendPasswordResetEmail, useSignInWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useForm } from 'react-hook-form';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import Loading from '../shared/Loading';
-import SocialLogin from './SocialLogin';
 
 const Login = () => {
-    const [user, loading] = useAuthState(auth);
-    const [agree, setAgree] = useState(false);
-    const [userError, setUserError] = useState(' ');
-    const nameRef = useRef("");
-    const emailRef = useRef("");
-    const passwordRef = useRef("");
-    const confirmPasswordRef = useRef("");
-    const navigate = useNavigate();
-    const location = useLocation();
-    const [
-        createUserWithEmailAndPassword,
-        registerUser,
-        registerLoading,
-        registerError,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
     const [
         signInWithEmailAndPassword,
-        loginUser,
-        loginLoading,
-        loginError,
+        emailPassUser,
+        emailPassLoading,
+        emailPassError,
     ] = useSignInWithEmailAndPassword(auth);
-    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
     const [sendPasswordResetEmail, resetSending, resetError] = useSendPasswordResetEmail(auth);
+    const [isEmail, setEmail] = useState('');
+    const { register, formState: { errors }, handleSubmit } = useForm();
+
+    // const [token] = useToken(emailPassUser || googleUser);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    let errorMassage;
     let from = location.state?.from?.pathname || "/";
-    let errorElement;
-
-
-    //registration here..............
-    const handleRegister = async (event) => {
-        event.preventDefault();
-        const name = nameRef.current.value;
-        const email = emailRef.current.value;
-        const password = passwordRef.current.value;
-        const confirmPassword = confirmPasswordRef.current.value;
-
-        if (password.length < 6) {
-            setUserError('Password must be 6 character!');
-        } else if (password !== confirmPassword) {
-            setUserError('Password not matched');
-        } else {
-            setUserError('')
-            await createUserWithEmailAndPassword(email, password)
-            await updateProfile({ displayName: name });
-        }
-
-    }
 
     useEffect(() => {
-        if (registerUser && user) {
-
-            //navigate(from, { replace: true });
-        }
-    }, [registerUser, from, navigate, user]);
-    //registration here..............
-
-
-    //login here.............
-    const handleLogin = (event) => {
-        event.preventDefault();
-        const email = emailRef.current.value;
-        const password = passwordRef.current.value;
-        signInWithEmailAndPassword(email, password);
-        event.target.reset();
-    }
-
-    // -----------token -------------
-    useEffect(() => {
-        if (loginUser) {
+        if (googleUser || emailPassUser) {
             navigate(from, { replace: true });
         }
-    }, [loginUser, from, navigate]);
-    // -----------token -------------
-    //login here...........
+    }, [googleUser, emailPassUser, from, navigate])
 
-    //Reset password here.........
+
+    if (googleLoading || emailPassLoading) {
+        return <Loading></Loading>
+    }
+    if (googleError || emailPassError) {
+        errorMassage = <p className='text-danger'>{googleError?.message || emailPassError?.message}</p>
+    }
+
+
+    const onSubmit = data => {
+        signInWithEmailAndPassword(data.email, data.password)
+    };
+
     const resetPassword = async () => {
-        const email = emailRef.current.value;
-
-        if (email) {
-            await sendPasswordResetEmail(email);
+        if (isEmail) {
+            await sendPasswordResetEmail(isEmail);
             toast.success('Sent email');
         } else {
             toast.error('Please enter your email');
         }
     }
 
-    //firebase error here........
-    if (registerError || loginError || resetError || updateError) {
-        errorElement = <p className='text-danger '>Error: {registerError?.message || loginError?.message || resetError?.message || updateError?.message}</p>
+    const onChangeEmail = e => {
+        const email = e.target.value;
+        setEmail(email);
     }
-    //loading here..........
-    if (registerLoading || loginLoading || resetSending || updating || loading) {
-        return <Loading></Loading>
-    }
-
-
 
     return (
-        <div className="container">
-            <p>{user?.displayName}</p>
-            <div className="row  my-5 w-50 mx-auto width-sizing">
-                <h5 className='text-center mb-5 text-color'>{agree ? "Registration" : "Login"}</h5>
+        <div className="container my-5">
+            <div className="row  w-50 mx-auto ">
+                <h5 className='text-center my-5'>Login</h5>
                 <div className="col">
-                    {
-                        agree ?
-                            <>
-                                <form onSubmit={handleRegister} >
-                                    <div className="mb-3">
-                                        <input type="text" ref={nameRef} className="w-100 rounded input-style py-2 px-2" id="exampleInputName" placeholder='Your Name' required />
-                                    </div>
-                                    <div className="mb-3">
-                                        <input type="email" ref={emailRef} name="email" className="w-100 rounded input-style py-2 px-2" id="exampleInputEmail" placeholder='Your Email' required />
-                                    </div>
-                                    <div className="mb-3">
-                                        <input type="password" ref={passwordRef} name="password" className="w-100 rounded input-style py-2 px-2" id="exampleInputPassword1" placeholder='Password' required />
-                                    </div>
-                                    <div className="mb-3">
-                                        <input type="password" ref={confirmPasswordRef} name="confirmPassword" className="w-100 rounded input-style py-2 px-2" id="exampleInputConfirmPassword1" placeholder='Confirm Password' required />
-                                    </div>
-                                    <p className="text-danger ">{userError || ''}</p>
-                                    <div className="mb-3 form-check">
-                                        <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                                        <label className="form-check-label text-color" htmlFor="exampleCheck1">Agree terms & condition</label>
-                                    </div>
-                                    <button type="submit" className='btn  secondary-color w-50 mx-auto d-block mb-5'>Register</button>
-                                    {
-                                        agree ? " " : errorElement
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <div>
+                            <input
+                                {...register("email", {
+                                    required: {
+                                        value: true,
+                                        message: 'Email is required'
+                                    },
+                                    pattern: {
+                                        value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                                        message: 'Provide a valid email'
                                     }
-                                </form>
-                            </>
-                            :
-                            <>
-                                <form onSubmit={handleLogin} >
-                                    <div className="mb-3">
-                                        <input type="email" ref={emailRef} name="email" className="w-100 rounded input-style py-2 px-2" id="exampleInputEmail" placeholder='Your Email' required />
-                                    </div>
-                                    <div className="mb-3">
-                                        <input type="password" ref={passwordRef} name="password" className="w-100 rounded input-style py-2 px-2" id="exampleInputPassword1" placeholder='Password' required />
-                                    </div>
-                                    {errorElement}
-                                    <button type="submit" className='btn secondary-color w-50 mx-auto d-block mb-5'>Login</button>
-                                </form>
-                            </>
-                    }
-                    {
-                        agree ? " " :
-                            <p className='width-sizing text-color m-0'>Forget Password ?<span className='btn text-color fst-italic fw-bold' onClick={resetPassword}>Reset Password</span></p>
-                    }
-                    <p className='width-sizing text-color m-0 '>{agree ? "Already have an account ?" : "New to Warehouse ?"} <span onClick={() => setAgree(!agree)} className='btn text-color fst-italic fw-bold'>{agree ? "Please Login" : "Please Register"} </span></p>
-                    <SocialLogin></SocialLogin>
+                                }
+                                )}
+                                type="email"
+                                name="email"
+                                onChange={onChangeEmail}
+                                placeholder="Your email"
+                                className="w-100 rounded p-2 "
+                            />
+                            <label className="label">
+                                {errors.email?.type === 'required' && <span className="text-danger">{errors.email.message}</span>}
+                                {errors.email?.type === 'pattern' && <span className="text-danger">{errors.email.message}</span>}
+                            </label>
+                        </div>
 
+                        <div className='my-4'>
+                            <input
+                                {...register("password", {
+                                    required: {
+                                        value: true,
+                                        message: 'Password is required'
+                                    },
+                                    minLength: {
+                                        value: 6,
+                                        message: 'Must be 6 characters or longer'
+                                    }
+                                }
+                                )}
+                                type="password"
+                                name="password"
+                                placeholder="Your Password"
+                                className="w-100 rounded  p-2 "
+                            />
+                            <label className="label">
+                                {errors.password?.type === 'required' && <span className="text-danger">{errors.password.message}</span>}
+                                {errors.password?.type === 'minLength' && <span className="text-danger">{errors.password.message}</span>}
+                            </label>
+                        </div>
+                        {errorMassage}
+                        <input type="submit" className='btn secondary-color w-50 mx-auto d-block mb-5' value="Log in" />
+                    </form>
+                    <p><small>Forget Password ? <Link to='#' onClick={resetPassword} className='fw-bold text-dark text-decoration-none'>Reset Password</Link></small></p>
+                    <div> <p><small>New to Metal World ? <Link to="/signUp" className='fw-bold text-dark text-decoration-none'>Create New Account</Link></small></p>
+                        <div className='d-flex align-items-center my-2'>
+                            <div style={{ height: '2px' }} className='bg-dark w-50 rounded'></div>
+                            <p className='mt-2 px-2 text-color'>or</p>
+                            <div style={{ height: '2px' }} className='bg-dark w-50 rounded'></div>
+                        </div>
+
+                        <div>
+                            <button onClick={() => signInWithGoogle()} className='btn secondary-color w-50 mx-auto d-block my-2 py-2 width-sizing'>
+                                <span className='me-2 fs-6'><i className="fa-brands fa-google"></i></span>
+                                <span>Google Login </span>
+                            </button>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

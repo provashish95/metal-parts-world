@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <footer className='primary-color'>
             <section className='container py-3'>
-                <div className="row py-5 g-5">
+                <div className="row py-5">
                     <div className="col-sm-12 col-md-6 col-lg-4 ">
                         <p className='fw-bold mb-1'> <small >METAL PARTS WORLD</small></p>
                         <p>Metal parts world stores metal tool items and our customer knows that effective management is the difference between fulfilling <br />customer orders quickly and accurately while keeping costs down versus hearing <br />  complaints  about delayed  or inaccurate shipments and higher operating costs.</p>

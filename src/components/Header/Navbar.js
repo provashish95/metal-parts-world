@@ -1,5 +1,4 @@
 import { signOut } from 'firebase/auth';
-import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
@@ -8,13 +7,16 @@ import Loading from '../shared/Loading';
 
 
 const Navbar = () => {
-    const [user] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
 
-
+    if (loading) {
+        return <Loading></Loading>
+    }
 
     const handleSignOut = () => {
         signOut(auth);
     }
+
 
 
     return (
@@ -35,7 +37,7 @@ const Navbar = () => {
                     </ul>
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-
+                            <p>{user?.displayName}</p>
                         </li>
                         <li className="nav-item">
                             {
