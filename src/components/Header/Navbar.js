@@ -9,10 +9,6 @@ import Loading from '../shared/Loading';
 const Navbar = () => {
     const [user, loading] = useAuthState(auth);
 
-    if (loading) {
-        return <Loading></Loading>
-    }
-
     const handleSignOut = () => {
         signOut(auth);
     }
