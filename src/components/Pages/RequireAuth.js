@@ -6,14 +6,15 @@ import Loading from '../shared/Loading';
 
 const RequireAuth = ({ children }) => {
     const [user, loading] = useAuthState(auth);
-    const location = useLocation()
+    let location = useLocation();
 
     if (loading) {
-        return <Loading></Loading>
+        return <Loading />;
     }
 
+    // if user not logedin, then go to login page
     if (!user) {
-        return <Navigate to="/login" state={{ from: location }} replace></Navigate>
+        return <Navigate to='/login' state={{ from: location }} replace />;
     }
 
     return children;
