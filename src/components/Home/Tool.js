@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Tool = ({ product }) => {
     const navigate = useNavigate();
-    const { _id, name, img, price, availableQuantity, minimumOrderQuantity, description } = product;
+    const { _id, name, img, price, quantity, minimumOrderQuantity, description } = product;
 
     const navigateToPurchase = (id) => {
         navigate(`/purchase/${id}`);
@@ -15,8 +15,8 @@ const Tool = ({ product }) => {
             <div className="card-body text-color">
                 <h5 className="card-title">{name}</h5>
                 <p className="card-text">{description.slice(0, 70)}...</p>
-                <p className="card-text"><span className='fw-bold'>Price:</span> {price} $</p>
-                <p className="card-text"><span className='fw-bold'>Available quantity:</span> {availableQuantity}</p>
+                <p className="card-text"><span className='fw-bold'>Price for 1 item:</span> {price} $</p>
+                <p className="card-text"><span className='fw-bold'>Available quantity:</span> {quantity}</p>
                 <p className="card-text"><span className='fw-bold'>Minimum order quantity:</span> {minimumOrderQuantity}</p>
                 <button onClick={() => navigateToPurchase(_id)} className='btn btn-dark d-block mx-auto'> buy now</button>
             </div>

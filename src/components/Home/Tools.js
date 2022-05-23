@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Loading from '../shared/Loading';
 import Tool from './Tool';
 
 const Tools = () => {
@@ -8,9 +9,13 @@ const Tools = () => {
         fetch('http://localhost:5000/products')
             .then(res => res.json())
             .then(data => {
-                setProducts(data);
+                setProducts(data.slice(-3).reverse());
             })
     }, []);
+
+    if (!products) {
+        return <Loading></Loading>
+    }
 
     // console.log(products.slice(-3).reverse());
 
@@ -19,7 +24,7 @@ const Tools = () => {
             <div className="row">
                 <h2 className='text-center'>Tools</h2>
                 {
-                    products?.slice(-3).reverse().map(product => <Tool key={product._id} product={product}></Tool>)
+                    products?.map(product => <Tool key={product._id} product={product}></Tool>)
                 }
             </div>
         </div>
