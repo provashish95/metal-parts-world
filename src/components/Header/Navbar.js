@@ -3,7 +3,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
 import '../shared/custom.css';
-import Loading from '../shared/Loading';
+
 
 
 const Navbar = () => {
@@ -12,8 +12,6 @@ const Navbar = () => {
     const handleSignOut = () => {
         signOut(auth);
     }
-
-
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark  primary-color ">
@@ -52,8 +50,6 @@ const Navbar = () => {
                                     :
                                     <Link className="nav-link" to="/login">Log in </Link>
                             }
-
-
                         </li>
                     </ul>
                 </div>
