@@ -27,19 +27,30 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
                         <li className="nav-item">
-                            <Link className="nav-link" to="/home">HOME</Link>
+                            <Link className="nav-link" to="/home">Home</Link>
                         </li>
-
-                    </ul>
-                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <p>{user?.displayName}</p>
+                            <Link className="nav-link" to="/blog">Blog</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/myPortfolio">My Portfolio</Link>
                         </li>
                         <li className="nav-item">
                             {
-                                user ? <Link onClick={handleSignOut} className="nav-link" to="/login">LOG OUT</Link>
+                                user ? <Link className="nav-link" to="/dashboard">Dashboard</Link> : " "
+                            }
+                        </li>
+                    </ul>
+                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                        {
+                            user && <p className=" text-white secondary-color border-2 rounded-3 py-1 px-2 me-2" to="#">{user?.displayName}</p>
+                        }
+                        <li className="nav-item">
+                            {
+                                user ? <Link onClick={handleSignOut} className="nav-link" to="/login">Log out</Link>
                                     :
-                                    <Link className="nav-link" to="/login">LOGIN</Link>
+                                    <Link className="nav-link" to="/login">Log in </Link>
                             }
 
 
