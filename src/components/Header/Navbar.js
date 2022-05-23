@@ -7,7 +7,7 @@ import Loading from '../shared/Loading';
 
 
 const Navbar = () => {
-    const [user, loading] = useAuthState(auth);
+    const [user] = useAuthState(auth);
 
     const handleSignOut = () => {
         signOut(auth);
