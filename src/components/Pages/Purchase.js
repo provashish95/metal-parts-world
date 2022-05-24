@@ -1,14 +1,16 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import auth from '../../firebase.init';
 import Loading from '../shared/Loading';
 import { toast } from 'react-toastify';
+import { signOut } from 'firebase/auth';
 
 
 const Purchase = () => {
     const [user] = useAuthState(auth);
     const { id } = useParams();
+    const navigate = useNavigate();
 
 
     const [isDisable, setIsDisable] = useState(false);
@@ -36,7 +38,9 @@ const Purchase = () => {
         })
             .then(res => {
                 if (res.status === 401 || res.status === 403) {
-                    toast.error('Unauthorize access');
+                    signOut(auth);
+                    localStorage.removeItem('accessToken');
+                    navigate('/')
                 }
                 return res.json()
             })
@@ -44,7 +48,7 @@ const Purchase = () => {
                 setCount(parseInt(data.minimumOrderQuantity));
                 setProduct(data);
             });
-    }, [id])
+    }, [id, navigate])
 
     if (Object.keys(product).length === 0) {
         return <Loading></Loading>
@@ -98,9 +102,11 @@ const Purchase = () => {
                 body: JSON.stringify(orders)
             })
                 .then((response) => {
-                    console.log(response);
+
                     if (response.status === 401 || response.status === 403) {
-                        toast.error("Unauthorize access");
+                        signOut(auth);
+                        localStorage.removeItem('accessToken');
+                        navigate('/')
                     }
                     return response.json()
                 })
