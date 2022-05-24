@@ -4,10 +4,11 @@ const useToken = (user) => {
     const [token, setToken] = useState();
 
     useEffect(() => {
+
         const email = user?.user?.email;
         const currentUser = { email: email };
         if (user) {
-            fetch(`https://pacific-badlands-31165.herokuapp.com/user/${email}`, {
+            fetch(`http://localhost:5000/user/${email}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'

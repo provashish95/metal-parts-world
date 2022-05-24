@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
+import useToken from '../../hooks/useToken';
 import Loading from '../shared/Loading';
 
 const Register = () => {
@@ -14,7 +14,7 @@ const Register = () => {
         emailPassError,
     ] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
-    //const [token] = useToken(googleUser || emailPassUser);
+    const [token] = useToken(emailPassUser);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -22,10 +22,11 @@ const Register = () => {
     let errorMassage;
 
     useEffect(() => {
-        if (emailPassUser) {
+        if (token) {
             navigate(from, { replace: true });
+
         }
-    }, [navigate, emailPassUser, from])
+    }, [navigate, token, from])
 
     if (emailPassLoading || updating) {
         return <Loading></Loading>
@@ -38,7 +39,6 @@ const Register = () => {
     const onSubmit = async (data) => {
         await createUserWithEmailAndPassword(data.email, data.password)
         await updateProfile({ displayName: data.name });
-        toast.success("update done");
     };
 
     return (
