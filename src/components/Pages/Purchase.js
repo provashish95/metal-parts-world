@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 import auth from '../../firebase.init';
 import Loading from '../shared/Loading';
 import { toast } from 'react-toastify';
-import { set } from 'react-hook-form';
 
 const Purchase = () => {
     const [user] = useAuthState(auth);
@@ -27,11 +26,20 @@ const Purchase = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/products/${id}`)
+        fetch(`http://localhost:5000/products/${id}`, {
+            method: 'GET',
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
             .then(res => res.json())
             .then(data => {
-                setCount(parseInt(data.minimumOrderQuantity));
-                setProduct(data);
+                if (data.message) {
+                    toast.error(data.message)
+                } else {
+                    setCount(parseInt(data.minimumOrderQuantity));
+                    setProduct(data);
+                }
             });
     }, [id])
 
@@ -81,14 +89,19 @@ const Purchase = () => {
             fetch('http://localhost:5000/orders', {
                 method: 'POST',
                 headers: {
-                    'Content-type': 'application/json'
+                    'Content-type': 'application/json',
+                    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 },
                 body: JSON.stringify(orders)
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    toast.success(data.success)
-                    event.target.reset()
+                    if (data.message) {
+                        toast.error(data?.message)
+                    } else {
+                        toast.success(data.success)
+                        event.target.reset()
+                    }
                 });
         }
     }
@@ -100,6 +113,9 @@ const Purchase = () => {
     }
     const handleDecrement = () => {
         setCount(count - 1)
+        setIsDisable(false);
+    }
+    const handleError = (event) => {
         setIsDisable(false);
     }
 
@@ -136,7 +152,7 @@ const Purchase = () => {
                             <p className='text-center'> <small >Minimum quantity will be {minimumOrderQuantity}</small></p>
                         </div>
                         <div className="mb-3 text-center">
-                            <input type="text" ref={quantityRef} value={count} className="w-50 mx-auto rounded text-center  p-1" />
+                            <input type="text" onChange={handleError} ref={quantityRef} value={count} className="w-50 mx-auto rounded text-center  p-1 " />
                         </div>
                         <div className='text-center mb-4'>
                             <button onClick={handleIncrement} className='btn btn-dark me-2'>+</button>
