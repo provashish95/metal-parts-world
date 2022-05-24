@@ -9,9 +9,13 @@ import { set } from 'react-hook-form';
 const Purchase = () => {
     const [user] = useAuthState(auth);
     const { id } = useParams();
+
     const [isDisable, setIsDisable] = useState(false);
     const [product, setProduct] = useState({});
     const { name, img, description, price, minimumOrderQuantity, quantity } = product;
+
+    const [count, setCount] = useState(0);
+
     const nameRef = useRef("");
     const emailRef = useRef("");
     const phoneRef = useRef("");
@@ -20,10 +24,13 @@ const Purchase = () => {
 
 
 
+
+
     useEffect(() => {
         fetch(`http://localhost:5000/products/${id}`)
             .then(res => res.json())
             .then(data => {
+                setCount(parseInt(data.minimumOrderQuantity));
                 setProduct(data);
             });
     }, [id])
@@ -86,7 +93,13 @@ const Purchase = () => {
         }
     }
 
-    const onChnageQuantity = event => {
+
+    const handleIncrement = () => {
+        setCount(count + 1)
+        setIsDisable(false);
+    }
+    const handleDecrement = () => {
+        setCount(count - 1)
         setIsDisable(false);
     }
 
@@ -96,7 +109,7 @@ const Purchase = () => {
             <h5 className='text-center my-5'>Purchase Your Product</h5>
             <div className="row g-0 justify-content-center align-items-center">
                 <div className="col-12">
-                    <div className="card mb-3" >
+                    <div className="card mb-3 shadow-lg" >
                         <div className="row g-0 justify-content-center align-items-center p-3 ">
                             <div className="col-md-4 text-center py-5">
                                 <img src={img} className="img-fluid rounded-start" alt="..." />
@@ -107,7 +120,7 @@ const Purchase = () => {
                                     <p className="card-text">{description}</p>
                                     <p className="card-text">Price for 1 item: <small className="text-muted">{price}</small></p>
                                     <p className="card-text">Available Quantity: <small className="text-muted">{quantity}</small></p>
-                                    <p className="card-text">Minimum Order: <small className="text-muted">{minimumOrderQuantity}</small></p>
+                                    <p className="card-text">Minimum quantity: <small className="text-muted">{minimumOrderQuantity}</small></p>
                                 </div>
                             </div>
                         </div>
@@ -118,15 +131,18 @@ const Purchase = () => {
             <div className="row my-5">
                 <div className="col-12">
                     <div className='w-50 mx-auto'>
-                        <p className='text-center fw-bold'>Minimum Quantity</p>
-                        <form onSubmit={handleOrder}>
-                            <div className="mb-3 text-center">
-                                <input type="text" value={minimumOrderQuantity} className="w-50 mx-auto rounded text-center  p-1" readOnly disabled />
-                            </div>
+                        <div className='text center'>
                             <p className='text-center fw-bold'>Add your quantity</p>
-                            <div className="mb-3 text-center">
-                                <input type="text" onChange={onChnageQuantity} ref={quantityRef} className="w-50 mx-auto rounded text-center  p-1" required />
-                            </div>
+                            <p className='text-center'> <small >Minimum quantity will be {minimumOrderQuantity}</small></p>
+                        </div>
+                        <div className="mb-3 text-center">
+                            <input type="text" ref={quantityRef} value={count} className="w-50 mx-auto rounded text-center  p-1" />
+                        </div>
+                        <div className='text-center mb-4'>
+                            <button onClick={handleIncrement} className='btn btn-dark me-2'>+</button>
+                            <button onClick={handleDecrement} className='btn btn-dark'>-</button>
+                        </div>
+                        <form onSubmit={handleOrder}>
                             <p className='text-center fw-bold'>Add your Info</p>
                             <div className="mb-3">
                                 <input type="text" ref={nameRef} name="name" value={user?.displayName} className="w-100 rounded  p-1" readOnly disabled />
@@ -140,7 +156,7 @@ const Purchase = () => {
                             <div className="mb-3">
                                 <textarea ref={addressRef} className="w-100 rounded" placeholder="Add Your Address" required></textarea>
                             </div>
-                            <button type="submit" className='btn btn-primary w-50 mx-auto d-block mb-5' disabled={isDisable}>Order Now</button>
+                            <button type="submit" className='btn btn-dark w-50 mx-auto d-block mb-5' disabled={isDisable}>Order Now</button>
                         </form>
 
                     </div>
