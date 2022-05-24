@@ -13,6 +13,9 @@ import NotFound from './components/Pages/NotFound';
 import Blog from './components/Pages/Blog';
 import MyPortfolio from './components/Pages/MyPortfolio';
 import Dashboard from './components/Dashboard/Dashboard';
+import MyProfile from './components/Dashboard/MyProfile';
+import AddReview from './components/Dashboard/AddReview';
+import MyOrders from './components/Dashboard/MyOrders';
 
 function App() {
   return (
@@ -25,12 +28,25 @@ function App() {
         <Route path='register' element={<Register></Register>}></Route>
         <Route path='blog' element={<Blog></Blog>}></Route>
         <Route path='myPortfolio' element={<MyPortfolio></MyPortfolio>}></Route>
-        <Route path='dashboard' element={<Dashboard></Dashboard>}></Route>
+
         <Route path='/purchase/:id' element={
           <RequireAuth>
             <Purchase></Purchase>
           </RequireAuth>
         }></Route>
+
+        {/* nested route  */}
+        <Route path='dashboard' element={
+          <RequireAuth>
+            <Dashboard></Dashboard>
+          </RequireAuth>
+        }>
+          <Route index element={<MyProfile></MyProfile>}></Route>
+          <Route path='review' element={<AddReview></AddReview>}></Route>
+          <Route path='MyOrders' element={<MyOrders></MyOrders>}></Route>
+
+        </Route>
+        {/* nested route  */}
 
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
