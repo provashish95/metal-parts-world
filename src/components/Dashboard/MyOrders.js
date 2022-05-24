@@ -1,14 +1,12 @@
-import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import Loading from '../shared/Loading';
 
 const MyOrders = () => {
     const [myOrders, setMyOrders] = useState();
     const [user, loading] = useAuthState(auth);
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (user) {
@@ -20,9 +18,7 @@ const MyOrders = () => {
             })
                 .then(res => {
                     if (res.status === 401 || res.status === 403) {
-                        signOut(auth);
-                        localStorage.removeItem('accessToken');
-                        navigate('/')
+                        toast.error('Unauthorize access');
                     }
                     return res.json()
                 })
@@ -30,7 +26,7 @@ const MyOrders = () => {
                     setMyOrders(data)
                 })
         }
-    }, [user, navigate]);
+    }, [user]);
 
     if (loading) {
         return <Loading></Loading>
@@ -38,7 +34,7 @@ const MyOrders = () => {
 
     return (
         <div>
-            <h2>My odrers : {myOrders?.length}</h2>
+            <h2>My oders : {myOrders?.length}</h2>
         </div>
     );
 };

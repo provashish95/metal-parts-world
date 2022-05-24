@@ -5,9 +5,11 @@ import auth from '../../firebase.init';
 import Loading from '../shared/Loading';
 import { toast } from 'react-toastify';
 
+
 const Purchase = () => {
     const [user] = useAuthState(auth);
     const { id } = useParams();
+
 
     const [isDisable, setIsDisable] = useState(false);
     const [product, setProduct] = useState({});
@@ -32,14 +34,15 @@ const Purchase = () => {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
-            .then(res => res.json())
-            .then(data => {
-                if (data.message) {
-                    toast.error(data.message)
-                } else {
-                    setCount(parseInt(data.minimumOrderQuantity));
-                    setProduct(data);
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    toast.error('Unauthorize access');
                 }
+                return res.json()
+            })
+            .then(data => {
+                setCount(parseInt(data.minimumOrderQuantity));
+                setProduct(data);
             });
     }, [id])
 
@@ -94,14 +97,16 @@ const Purchase = () => {
                 },
                 body: JSON.stringify(orders)
             })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data.message) {
-                        toast.error(data?.message)
-                    } else {
-                        toast.success(data.success)
-                        event.target.reset()
+                .then((response) => {
+                    console.log(response);
+                    if (response.status === 401 || response.status === 403) {
+                        toast.error("Unauthorize access");
                     }
+                    return response.json()
+                })
+                .then((data) => {
+                    toast.success(data.success)
+                    event.target.reset()
                 });
         }
     }
