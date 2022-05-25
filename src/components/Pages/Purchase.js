@@ -62,7 +62,7 @@ const Purchase = () => {
         const minQuantity = parseInt(minimumOrderQuantity);
         const availQuantity = parseInt(quantity);
 
-        const name = nameRef.current.value;
+        const userName = nameRef.current.value;
         const email = emailRef.current.value;
         const phone = phoneRef.current.value;
         const address = addressRef.current.value;
@@ -71,12 +71,14 @@ const Purchase = () => {
 
         const orders = {
             productId: id,
-            userName: name,
+            productName: name,
+            description: description,
+            price: totalPrice,
+            orderQuantity: myQuantity,
+            userName: userName,
             userEmail: email,
             userPhone: phone,
-            address: address,
-            price: totalPrice,
-            orderQuantity: myQuantity
+            address: address
         }
         //check quantity here 
         if (myQuantity < minQuantity) {
