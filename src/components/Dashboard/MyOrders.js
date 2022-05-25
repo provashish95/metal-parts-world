@@ -1,9 +1,6 @@
-import { signOut } from 'firebase/auth';
-import React, { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import Loading from '../shared/Loading';
 import ConfirmationModal from './ConfirmationModal';

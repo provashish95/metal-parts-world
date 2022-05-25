@@ -16,6 +16,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import MyProfile from './components/Dashboard/MyProfile';
 import AddReview from './components/Dashboard/AddReview';
 import MyOrders from './components/Dashboard/MyOrders';
+import Payment from './components/Dashboard/Payment';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route index element={<MyProfile></MyProfile>}></Route>
           <Route path='review' element={<AddReview></AddReview>}></Route>
           <Route path='MyOrders' element={<MyOrders></MyOrders>}></Route>
+          <Route path='payment/:id' element={<Payment></Payment>}></Route>
 
         </Route>
         {/* nested route  */}

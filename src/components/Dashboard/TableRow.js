@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
-import ConfirmationModal from './ConfirmationModal';
+import { Link } from 'react-router-dom';
 
 const TableRow = ({ order, index, refetch, setDeletingOrder, setShow }) => {
-
-    // console.log(order);
-    const { productName, description, orderQuantity, price } = order;
+    console.log(order);
+    const { _id, productName, description, orderQuantity, price } = order;
 
     const openModal = () => {
         setDeletingOrder(order);
@@ -20,9 +19,10 @@ const TableRow = ({ order, index, refetch, setDeletingOrder, setShow }) => {
             <td>{orderQuantity} </td>
             <td>{description.slice(0, 15)}...</td>
             <td>
-                <Button variant="primary" onClick={openModal}>
-                    Launch vertically centered modal
+                <Button variant="primary me-2" onClick={openModal}>
+                    cancel
                 </Button>
+                <Link to={`/dashboard/payment/${_id}`} className='btn btn-info'>Pay</Link>
             </td>
         </tr >
     );
