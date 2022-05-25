@@ -78,7 +78,8 @@ const Purchase = () => {
             userName: userName,
             userEmail: email,
             userPhone: phone,
-            address: address
+            address: address,
+            img: img
         }
         //check quantity here 
         if (myQuantity < minQuantity) {
