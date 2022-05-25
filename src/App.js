@@ -39,20 +39,12 @@ function App() {
         }></Route>
 
         {/* nested route  */}
-        <Route path='dashboard' element={
-          <RequireAuth>
-            <Dashboard></Dashboard>
-          </RequireAuth>
-        }>
+        <Route path='dashboard' element={<RequireAuth> <Dashboard></Dashboard></RequireAuth>}>
           <Route index element={<MyProfile></MyProfile>}></Route>
           <Route path='review' element={<AddReview></AddReview>}></Route>
           <Route path='MyOrders' element={<MyOrders></MyOrders>}></Route>
           <Route path='payment/:id' element={<Payment></Payment>}></Route>
-          <Route path='makeAdmin' element={
-            <RequireAdmin>
-              <MakeAdmin></MakeAdmin>
-            </RequireAdmin>
-          }></Route>
+          <Route path='makeAdmin' element={<RequireAdmin><MakeAdmin></MakeAdmin></RequireAdmin>}></Route>
 
         </Route>
         {/* nested route  */}

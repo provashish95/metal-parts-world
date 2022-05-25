@@ -16,18 +16,21 @@ const Dashboard = () => {
                     <ul className='side-nav-ul border shadow-lg'>
                         <li className='side-nav-link border p'><Link to='/dashboard'>My Profile</Link></li>
                         {
-                            user && <>
-                                <li className='side-nav-link border'><Link to='/dashboard/MyOrders'>My Orders</Link></li>
-                                <li className='side-nav-link border'><Link to='/dashboard/review'>Add A Review</Link></li>
-                            </>
+                            user && !admin ?
+                                <>
+                                    <li className='side-nav-link border'><Link to='/dashboard/MyOrders'>My Orders</Link></li>
+                                    <li className='side-nav-link border'><Link to='/dashboard/review'>Add A Review</Link></li>
+                                </> : ''
+
                         }
-                        <li className='side-nav-link border'><Link to='/dashboard'>My Profile</Link></li>
-                        {/* for admin .... */}
-                        <li className='side-nav-link border'><Link to='/dashboard'>Manage All Orders</Link></li>
-                        <li className='side-nav-link border'><Link to='/dashboard'>Add A Product</Link></li>
-                        <li className='side-nav-link border'><Link to='/dashboard'>Manage Products</Link></li>
+
                         {
-                            admin && <li className='side-nav-link border'><Link to='/dashboard/makeAdmin'>Make Admin</Link></li>
+                            admin && <>
+                                <li className='side-nav-link border'><Link to='/dashboard'>Manage All Orders</Link></li>
+                                <li className='side-nav-link border'><Link to='/dashboard'>Add A Product</Link></li>
+                                <li className='side-nav-link border'><Link to='/dashboard'>Manage Products</Link></li>
+                                <li className='side-nav-link border'><Link to='/dashboard/makeAdmin'>Make Admin</Link></li>
+                            </>
                         }
                     </ul>
                 </div>
