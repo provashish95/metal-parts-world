@@ -27,7 +27,7 @@ const Dashboard = () => {
                         {
                             admin && <>
                                 <li className='side-nav-link border'><Link to='/dashboard'>Manage All Orders</Link></li>
-                                <li className='side-nav-link border'><Link to='/dashboard'>Add A Product</Link></li>
+                                <li className='side-nav-link border'><Link to='/dashboard/addProduct'>Add A Product</Link></li>
                                 <li className='side-nav-link border'><Link to='/dashboard'>Manage Products</Link></li>
                                 <li className='side-nav-link border'><Link to='/dashboard/makeAdmin'>Make Admin</Link></li>
                             </>
