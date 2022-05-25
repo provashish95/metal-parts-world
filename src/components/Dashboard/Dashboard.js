@@ -2,10 +2,12 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, Outlet } from 'react-router-dom';
 import auth from '../../firebase.init';
+import useAdmin from '../../hooks/useAdmin';
 
 
 const Dashboard = () => {
     const [user] = useAuthState(auth);
+    const [admin] = useAdmin(user);
 
     return (
         <div className='container-fluid'>
@@ -24,7 +26,9 @@ const Dashboard = () => {
                         <li className='side-nav-link border'><Link to='/dashboard'>Manage All Orders</Link></li>
                         <li className='side-nav-link border'><Link to='/dashboard'>Add A Product</Link></li>
                         <li className='side-nav-link border'><Link to='/dashboard'>Manage Products</Link></li>
-                        <li className='side-nav-link border'><Link to='/dashboard/makeAdmin'>Make Admin</Link></li>
+                        {
+                            admin && <li className='side-nav-link border'><Link to='/dashboard/makeAdmin'>Make Admin</Link></li>
+                        }
                     </ul>
                 </div>
                 <div className="col-sm-12 col-md-10 col-lg-10">
