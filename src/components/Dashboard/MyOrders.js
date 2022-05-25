@@ -6,6 +6,7 @@ import Loading from '../shared/Loading';
 import ConfirmationModal from './ConfirmationModal';
 import TableRow from './TableRow';
 
+
 const MyOrders = () => {
     const [deletingOrder, setDeletingOrder] = useState(null);
     const [user, loading] = useAuthState(auth);

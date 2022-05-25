@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const TableRow = ({ order, index, refetch, setDeletingOrder, setShow }) => {
     console.log(order);
-    const { _id, productName, description, orderQuantity, price } = order;
+    const { _id, productName, description, orderQuantity, price, paid, transactionId } = order;
 
     const openModal = () => {
         setDeletingOrder(order);
@@ -19,10 +19,17 @@ const TableRow = ({ order, index, refetch, setDeletingOrder, setShow }) => {
             <td>{orderQuantity} </td>
             <td>{description.slice(0, 15)}...</td>
             <td>
-                <Button variant="primary me-2" onClick={openModal}>
-                    cancel
-                </Button>
-                <Link to={`/dashboard/payment/${_id}`} className='btn btn-info'>Pay</Link>
+                {price && !paid && <>
+                    <Button variant="primary me-2" onClick={openModal}>
+                        cancel
+                    </Button>
+                </>}
+
+                {(price && !paid) && <Link to={`/dashboard/payment/${_id}`} className='btn btn-info'>Pay</Link>}
+                {(price && paid) && <>
+                    <p className='text-success fw-bold'>Paid</p>
+                    <p className='text-info'><small>Transaction id</small><br /> {transactionId}</p>
+                </>}
             </td>
         </tr >
     );
