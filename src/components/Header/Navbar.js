@@ -44,7 +44,8 @@ const Navbar = () => {
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
 
                         {
-                            user && <p className=" text-white secondary-color border-2 rounded-3 py-1 px-2 me-2" to="#">{user?.displayName}</p>
+                            user && <Link className="nav-link" to="/">{user?.displayName}</Link>
+
                         }
                         <li className="nav-item">
                             {

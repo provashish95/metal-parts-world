@@ -20,7 +20,6 @@ const Login = () => {
     const [token] = useToken(googleUser || emailPassUser);
     const { register, formState: { errors }, handleSubmit } = useForm();
 
-    // const [token] = useToken(emailPassUser || googleUser);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -63,7 +62,7 @@ const Login = () => {
 
     return (
         <div className="container my-5">
-            <div className="row  w-50 mx-auto ">
+            <div className="row  w-75 mx-auto">
                 <h5 className='text-center my-5'>Login</h5>
                 <div className="col">
                     <form onSubmit={handleSubmit(onSubmit)}>

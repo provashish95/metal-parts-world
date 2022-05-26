@@ -10,31 +10,31 @@ const AboutCompany = () => {
                         <div className="accordion-item">
                             <h2 className="accordion-header " id="flush-headingOne">
                                 <button className="accordion-button collapsed secondary-color" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                    Accordion Item #1
+                                    What type of service provide ?
                                 </button>
                             </h2>
                             <div id="flush-collapseOne" className="accordion-collapse collapse secondary-color" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+                                <div className="accordion-body">We provide two way services one is online and other is manually </div>
                             </div>
                         </div>
                         <div className="accordion-item">
                             <h2 className="accordion-header" id="flush-headingTwo">
                                 <button className="accordion-button collapsed secondary-color" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                    Accordion Item #2
+                                    Product delivery system ?
                                 </button>
                             </h2>
                             <div id="flush-collapseTwo" className="accordion-collapse collapse secondary-color" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                                <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+                                <div className="accordion-body">Metal parts have own vehicle for delivery  </div>
                             </div>
                         </div>
                         <div className="accordion-item">
                             <h2 className="accordion-header" id="flush-headingThree">
                                 <button className="accordion-button collapsed secondary-color" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                    Accordion Item #3
+                                    Have any shop / address ?
                                 </button>
                             </h2>
                             <div id="flush-collapseThree" className="accordion-collapse collapse secondary-color" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                                <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+                                <div className="accordion-body">Yes we have many sub center shop in our country but our main office is dhanmondi -32, sukrabad, dhaka</div>
                             </div>
                         </div>
                     </div>

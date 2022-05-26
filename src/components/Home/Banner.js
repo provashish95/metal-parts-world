@@ -33,8 +33,8 @@ const Banner = () => {
                 />
 
                 <Carousel.Caption>
-                    <h3>We give best services</h3>
-                    <p>Our company is our first priority and they are our luck</p>
+                    <h3>Our product is our strength</h3>
+                    <p>We believe that customer is our priority</p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -45,8 +45,8 @@ const Banner = () => {
                 />
 
                 <Carousel.Caption>
-                    <h3>We give best services</h3>
-                    <p>Our company is our first priority and they are our luck</p>
+                    <h3>Be strong with metal tools</h3>
+                    <p>Foundation is first word of success</p>
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>
