@@ -1,11 +1,26 @@
+.background-img {
+    background-image: url('../../images/banner/services.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .primary-color {
     background-color: #686666;
     /* font-family: 'Times New Roman', Times, serif; */
 }
 
 .secondary-color {
-    background-color: #adabab;
+    background-color: #c9c3c3;
     /* font-family: 'Times New Roman', Times, serif; */
+}
+
+.enchant-color {
+    color: rgb(218, 216, 216);
+}
+
+.transparent-bg {
+    background-color: #c9c3c326;
 }
 
 .icon-style {

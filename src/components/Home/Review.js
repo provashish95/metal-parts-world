@@ -9,8 +9,9 @@ const Review = () => {
 
     return (
         <div className='container'>
-            <div className="row">
-                <h2 className='text-center'>Reviews</h2>
+            <h4 className='text-center enchant-color mb-5'>REVIEWS</h4>
+            <div className="row py-4 my-4 transparent-bg">
+
                 {
                     reviews?.map(review => <ReviewCard key={review._id} review={review}></ReviewCard>)
                 }

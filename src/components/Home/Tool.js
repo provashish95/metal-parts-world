@@ -10,7 +10,7 @@ const Tool = ({ product }) => {
     }
 
     return (
-        <div className="card mx-auto shadow-lg p-3 mb-5 bg-body rounded" style={{ width: '18rem' }}>
+        <div className="card mx-auto secondary-color shadow-lg p-3 mb-5 rounded" style={{ width: '18rem' }}>
             <img src={img} className="card-img-top" alt="..." />
             <div className="card-body text-color">
                 <h5 className="card-title">{name}</h5>
