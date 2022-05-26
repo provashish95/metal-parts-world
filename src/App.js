@@ -20,6 +20,7 @@ import Payment from './components/Dashboard/Payment';
 import MakeAdmin from './components/Dashboard/MakeAdmin';
 import RequireAdmin from './components/Pages/RequireAdmin';
 import AddProduct from './components/Dashboard/AddProduct';
+import ManageAllOrders from './components/Dashboard/ManageAllOrders';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           <Route path='payment/:id' element={<Payment></Payment>}></Route>
           <Route path='makeAdmin' element={<RequireAdmin><MakeAdmin></MakeAdmin></RequireAdmin>}></Route>
           <Route path='addProduct' element={<RequireAdmin><AddProduct></AddProduct></RequireAdmin>}></Route>
+          <Route path='manageAllOrders' element={<RequireAdmin><ManageAllOrders></ManageAllOrders></RequireAdmin>}></Route>
 
         </Route>
         {/* nested route  */}

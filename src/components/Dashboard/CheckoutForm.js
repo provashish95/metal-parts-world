@@ -73,7 +73,7 @@ const CheckoutForm = ({ order }) => {
 
             //store  payment on  database
             const payment = {
-                appointment: _id,
+                orderId: _id,
                 transactionId: paymentIntent.id
             }
 

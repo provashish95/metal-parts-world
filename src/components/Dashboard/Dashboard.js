@@ -26,7 +26,7 @@ const Dashboard = () => {
 
                         {
                             admin && <>
-                                <li className='side-nav-link border'><Link to='/dashboard'>Manage All Orders</Link></li>
+                                <li className='side-nav-link border'><Link to='/dashboard/manageAllOrders'>Manage All Orders</Link></li>
                                 <li className='side-nav-link border'><Link to='/dashboard/addProduct'>Add A Product</Link></li>
                                 <li className='side-nav-link border'><Link to='/dashboard'>Manage Products</Link></li>
                                 <li className='side-nav-link border'><Link to='/dashboard/makeAdmin'>Make Admin</Link></li>
@@ -35,7 +35,7 @@ const Dashboard = () => {
                     </ul>
                 </div>
                 <div className="col-sm-12 col-md-10 col-lg-10">
-                    <h2>Dashboard</h2>
+
                     <Outlet></Outlet>
                 </div>
             </div>
