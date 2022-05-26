@@ -17,7 +17,6 @@ const Tools = () => {
         return <Loading></Loading>
     }
 
-    // console.log(products.slice(-3).reverse());
 
     return (
         <div className='container'>

@@ -2,8 +2,8 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const TableRow = ({ order, index, refetch, setDeletingOrder, setShow }) => {
-    console.log(order);
+const TableRow = ({ order, index, setDeletingOrder, setShow }) => {
+
     const { _id, productName, description, orderQuantity, price, paid, transactionId } = order;
 
     const openModal = () => {

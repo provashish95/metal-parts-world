@@ -1,29 +1,17 @@
 import React, { useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
-import auth from '../../firebase.init';
 import Loading from '../shared/Loading';
-import ConfirmationModal from './ConfirmationModal';
-import TableRow from './TableRow';
+import ProductModal from './ProductModal';
+import ProductRow from './ProductRow';
 
-
-const MyOrders = () => {
+const ManageProducts = () => {
     const [deletingOrder, setDeletingOrder] = useState(null);
-    const [user, loading] = useAuthState(auth);
     const [show, setShow] = useState(false);
-    const { data: myOrders, isLoading, refetch } = useQuery('myOrders', () => fetch(`http://localhost:5000/order?userEmail=${user.email}`, {
-        headers: {
-            'authorization': `Bearer ${localStorage.getItem('accessToken')}`
-        }
-    }).then(res => res.json()));
+    const { data: products, isLoading, refetch } = useQuery('products', () => fetch(`http://localhost:5000/products`).then(res => res.json()));
 
-    if (loading || isLoading) {
+    if (isLoading) {
         return <Loading></Loading>
     }
-    if (myOrders.length === 0) {
-        return <Loading></Loading>
-    }
-
 
     return (
         <div className='container'>
@@ -35,7 +23,7 @@ const MyOrders = () => {
                             <thead className='text-color'>
                                 <tr>
                                     <th scope="col">SL</th>
-                                    <th scope="col">Product</th>
+                                    <th scope="col">Product Name</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Description</th>
@@ -44,7 +32,7 @@ const MyOrders = () => {
                             </thead>
                             <tbody>
                                 {
-                                    myOrders?.map((order, index) => <TableRow key={order._id} index={index} order={order} setDeletingOrder={setDeletingOrder} setShow={setShow}></TableRow>)
+                                    products?.map((product, index) => <ProductRow key={product._id} index={index} product={product} setDeletingOrder={setDeletingOrder} setShow={setShow}></ProductRow>)
                                 }
                             </tbody>
                         </table>
@@ -55,14 +43,14 @@ const MyOrders = () => {
                 {
                     deletingOrder && <>
 
-                        <ConfirmationModal
+                        <ProductModal
                             key={deletingOrder._id}
                             deletingOrder={deletingOrder}
                             setDeletingOrder={setDeletingOrder}
                             refetch={refetch}
                             show={show}
                             setShow={setShow}
-                        ></ConfirmationModal>
+                        ></ProductModal>
                     </>
                 }
 
@@ -72,4 +60,4 @@ const MyOrders = () => {
     );
 };
 
-export default MyOrders;
+export default ManageProducts;
