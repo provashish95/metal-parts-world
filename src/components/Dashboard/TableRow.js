@@ -20,15 +20,15 @@ const TableRow = ({ order, index, refetch, setDeletingOrder, setShow }) => {
             <td>{description.slice(0, 15)}...</td>
             <td>
                 {price && !paid && <>
-                    <Button variant="primary me-2" onClick={openModal}>
+                    <Button variant="danger me-2" onClick={openModal}>
                         cancel
                     </Button>
                 </>}
 
-                {(price && !paid) && <Link to={`/dashboard/payment/${_id}`} className='btn btn-info'>Pay</Link>}
+                {(price && !paid) && <Link to={`/dashboard/payment/${_id}`} className='btn btn-dark'>Pay</Link>}
                 {(price && paid) && <>
-                    <p className='text-success fw-bold'>Paid</p>
-                    <p className='text-info'><small>Transaction id</small><br /> {transactionId}</p>
+                    <p className='fw-bold'>Paid</p>
+                    <p className='my-0 py-0'>Transaction ID</p><small className="text-info"> {transactionId}</small>
                 </>}
             </td>
         </tr >

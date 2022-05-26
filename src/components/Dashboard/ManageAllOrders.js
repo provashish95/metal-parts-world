@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import Loading from '../shared/Loading';
+import DeleteModal from './DeleteModal';
 import RowForOrder from './RowForOrder';
 
 
 const ManageAllOrders = () => {
+    const [deletingOrder, setDeletingOrder] = useState(null);
+    const [show, setShow] = useState(false);
 
     const { data: allOrders, isLoading, refetch } = useQuery('allOrders', () => fetch('http://localhost:5000/orders', {
         method: 'GET',
@@ -38,7 +41,7 @@ const ManageAllOrders = () => {
                             </thead>
                             <tbody>
                                 {
-                                    allOrders?.map((allOrder, index) => <RowForOrder index={index} key={allOrder._id} allOrder={allOrder} refetch={refetch}></RowForOrder>)
+                                    allOrders?.map((allOrder, index) => <RowForOrder index={index} key={allOrder._id} allOrder={allOrder} refetch={refetch} setDeletingOrder={setDeletingOrder} setShow={setShow}></RowForOrder>)
                                 }
                             </tbody>
                         </table>
@@ -47,17 +50,17 @@ const ManageAllOrders = () => {
 
 
                 {
-                    /*  deletingOrder && <>
- 
-                         <ConfirmationModal
-                             key={deletingOrder._id}
-                             deletingOrder={deletingOrder}
-                             setDeletingOrder={setDeletingOrder}
-                             refetch={refetch}
-                             show={show}
-                             setShow={setShow}
-                         ></ConfirmationModal>
-                     </> */
+                    deletingOrder && <>
+
+                        <DeleteModal
+                            key={deletingOrder._id}
+                            deletingOrder={deletingOrder}
+                            setDeletingOrder={setDeletingOrder}
+                            refetch={refetch}
+                            show={show}
+                            setShow={setShow}
+                        ></DeleteModal>
+                    </>
                 }
 
 

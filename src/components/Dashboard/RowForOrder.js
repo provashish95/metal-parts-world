@@ -4,11 +4,15 @@ import { toast } from 'react-toastify';
 
 
 
-const RowForOrder = ({ allOrder, index, refetch }) => {
+const RowForOrder = ({ allOrder, index, refetch, setDeletingOrder, setShow }) => {
     const { _id, userName, orderQuantity, userEmail, productName, price, paid, status } = allOrder;
 
     const statusInfo = {
         status: 'shipped'
+    }
+    const openModal = () => {
+        setDeletingOrder(allOrder);
+        setShow(true);
     }
 
     const updateStatus = () => {
@@ -37,8 +41,13 @@ const RowForOrder = ({ allOrder, index, refetch }) => {
             <td>{price}</td>
             <td>{orderQuantity}</td>
             <td>
-                {(price && !paid) && <p className='text-success fw-bold'>unpaid</p>}
-                {(price && paid) && <button onClick={updateStatus} className='text-success fw-bold'>{status}</button>}
+                {(price && !paid) && <>
+                    <button className='btn btn-dark me-1'>unpaid</button>
+
+                    <button onClick={openModal} className='btn btn-danger'>delete</button>
+
+                </>}
+                {(price && paid) && <button onClick={updateStatus} className='btn btn-dark'>{status}</button>}
             </td>
         </tr >
     );
