@@ -1,7 +1,7 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 
-const UserRow = ({ user, index, refetch }) => {
+const UserRow = ({ user, index, refetch, setDeletingOrder, setShow }) => {
     const { email, role } = user;
 
     const handleAdmin = () => {
@@ -26,6 +26,13 @@ const UserRow = ({ user, index, refetch }) => {
     }
 
 
+    const openModal = () => {
+        setDeletingOrder(user);
+        setShow(true);
+    }
+
+
+
     return (
         <tr>
             <td>{index + 1}</td>
@@ -41,7 +48,7 @@ const UserRow = ({ user, index, refetch }) => {
             </td>
 
             <td>
-                <button className="btn btn-danger">remove</button>
+                <button onClick={openModal} className="btn btn-danger">remove</button>
             </td>
         </tr >
     );

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import Loading from '../shared/Loading';
+import DeleteUser from './DeleteUser';
 import UserRow from './UserRow';
 
 const MakeAdmin = () => {
+    const [deletingOrder, setDeletingOrder] = useState(null);
+    const [show, setShow] = useState(false);
     const { data: users, isLoading, refetch } = useQuery('users', () => fetch('http://localhost:5000/users', {
         method: 'GET',
         headers: {
@@ -31,12 +34,25 @@ const MakeAdmin = () => {
                             </thead>
                             <tbody>
                                 {
-                                    users?.map((user, index) => <UserRow index={index} key={user._id} user={user} refetch={refetch}></UserRow>)
+                                    users?.map((user, index) => <UserRow index={index} key={user._id} user={user} refetch={refetch} setDeletingOrder={setDeletingOrder} setShow={setShow}></UserRow>)
                                 }
                             </tbody>
                         </table>
                     </div>
                 </div>
+                {
+                    deletingOrder && <>
+
+                        <DeleteUser
+                            key={deletingOrder._id}
+                            deletingOrder={deletingOrder}
+                            setDeletingOrder={setDeletingOrder}
+                            refetch={refetch}
+                            show={show}
+                            setShow={setShow}
+                        ></DeleteUser>
+                    </>
+                }
             </div>
         </div>
     );
