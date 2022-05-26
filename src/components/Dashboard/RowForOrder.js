@@ -16,7 +16,7 @@ const RowForOrder = ({ allOrder, index, refetch, setDeletingOrder, setShow }) =>
     }
 
     const updateStatus = () => {
-        fetch(`http://localhost:5000/orders/${_id}`, {
+        fetch(`https://morning-waters-28594.herokuapp.com/orders/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',

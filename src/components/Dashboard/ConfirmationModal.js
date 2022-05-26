@@ -8,7 +8,7 @@ const ConfirmationModal = ({ refetch, deletingOrder, setDeletingOrder, show, set
     const { userEmail } = deletingOrder;
 
     const handleDelete = () => {
-        fetch(`http://localhost:5000/orders/${userEmail}`, {
+        fetch(`https://morning-waters-28594.herokuapp.com/orders/${userEmail}`, {
             method: 'DELETE',
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`

@@ -6,7 +6,7 @@ const ProductModal = ({ refetch, deletingOrder, setDeletingOrder, show, setShow 
     const { _id } = deletingOrder;
 
     const handleDelete = () => {
-        fetch(`http://localhost:5000/product/${_id}`, {
+        fetch(`https://morning-waters-28594.herokuapp.com/product/${_id}`, {
             method: 'DELETE',
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`

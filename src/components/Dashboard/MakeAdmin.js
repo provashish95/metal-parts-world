@@ -7,7 +7,7 @@ import UserRow from './UserRow';
 const MakeAdmin = () => {
     const [deletingOrder, setDeletingOrder] = useState(null);
     const [show, setShow] = useState(false);
-    const { data: users, isLoading, refetch } = useQuery('users', () => fetch('http://localhost:5000/users', {
+    const { data: users, isLoading, refetch } = useQuery('users', () => fetch('https://morning-waters-28594.herokuapp.com/users', {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`

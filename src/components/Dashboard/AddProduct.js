@@ -32,7 +32,7 @@ const AddProduct = () => {
                         img: img
                     }
                     //send to your database
-                    fetch('http://localhost:5000/products', {
+                    fetch('https://morning-waters-28594.herokuapp.com/products', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

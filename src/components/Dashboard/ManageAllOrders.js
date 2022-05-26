@@ -9,7 +9,7 @@ const ManageAllOrders = () => {
     const [deletingOrder, setDeletingOrder] = useState(null);
     const [show, setShow] = useState(false);
 
-    const { data: allOrders, isLoading, refetch } = useQuery('allOrders', () => fetch('http://localhost:5000/orders', {
+    const { data: allOrders, isLoading, refetch } = useQuery('allOrders', () => fetch('https://morning-waters-28594.herokuapp.com/orders', {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`

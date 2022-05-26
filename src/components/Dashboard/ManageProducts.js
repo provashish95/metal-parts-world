@@ -7,7 +7,7 @@ import ProductRow from './ProductRow';
 const ManageProducts = () => {
     const [deletingOrder, setDeletingOrder] = useState(null);
     const [show, setShow] = useState(false);
-    const { data: products, isLoading, refetch } = useQuery('products', () => fetch(`http://localhost:5000/products`).then(res => res.json()));
+    const { data: products, isLoading, refetch } = useQuery('products', () => fetch(`https://morning-waters-28594.herokuapp.com/products`).then(res => res.json()));
 
     if (isLoading) {
         return <Loading></Loading>

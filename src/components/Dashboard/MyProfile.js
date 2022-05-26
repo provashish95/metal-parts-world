@@ -8,7 +8,7 @@ import Loading from '../shared/Loading';
 const MyProfile = () => {
     const [user, loading] = useAuthState(auth);
 
-    const { data: userProfile, isLoading, refetch } = useQuery('userProfile', () => fetch(`http://localhost:5000/users/${user.email}`, {
+    const { data: userProfile, isLoading, refetch } = useQuery('userProfile', () => fetch(`https://morning-waters-28594.herokuapp.com/users/${user.email}`, {
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`
         }
@@ -36,7 +36,7 @@ const MyProfile = () => {
             education: education
         }
 
-        fetch(`http://localhost:5000/users/${user.email}`, {
+        fetch(`https://morning-waters-28594.herokuapp.com/users/${user.email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',
