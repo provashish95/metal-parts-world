@@ -58,7 +58,7 @@ const MyProfile = () => {
             <div className="row ">
                 <div className="col-sm-12 col-md-6 col-lg-6">
 
-                    <p className='text-center fw-bold'>Your Profile nfo</p>
+                    <p className='text-center fw-bold'>Your Profile info</p>
                     <label className="form-label">Your Name</label>
                     <div className="mb-3">
                         <input type="text" name="name" value={user?.displayName} className="w-100 rounded  p-1" readOnly disabled />
