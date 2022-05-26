@@ -60,10 +60,10 @@ const AddProduct = () => {
 
     return (
         <div className="container my-5">
-            <div className="row  w-50 mx-auto ">
+            <div className="row">
                 <h5 className='text-center my-5'>Add Product</h5>
                 <div className="col">
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleSubmit(onSubmit)} className='w-75 mx-auto'>
 
                         <div className='mb-4'>
                             <input
@@ -179,7 +179,7 @@ const AddProduct = () => {
 
 
 
-                        <input type="submit" className='btn secondary-color w-50 mx-auto d-block mb-5' value="Add" />
+                        <input type="submit" className='btn btn-dark w-50 mx-auto d-block mb-5' value="Add" />
                     </form>
 
                 </div>

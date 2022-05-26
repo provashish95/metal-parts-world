@@ -7,7 +7,7 @@ const BusinessSummary = () => {
 
                 <div className="row  py-5 px-2 justify-content-center align-items-center">
                     <div className="col-sm-12 col-md-6 col-lg-6  ">
-                        <h2 className=' text-center'><i class="fas fa-chart-bar"></i> METAL PARTS WORLD  <i class="fas fa-chart-bar"></i></h2>
+                        <h2 className=' text-center'><i className="fas fa-chart-bar"></i> METAL PARTS WORLD  <i className="fas fa-chart-bar"></i></h2>
                     </div>
                     <div className="col-sm-12 col-md-6 col-lg-6">
                         <p className='fs-5'><span><i className="fa-solid fa-circle-nodes"></i></span> <span>10+ years experience with customers and dealerships</span></p>

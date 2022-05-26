@@ -12,9 +12,9 @@ const ProductRow = ({ product, index, setDeletingOrder, setShow }) => {
         <tr>
             <td>{index + 1}</td>
             <td>{name}</td>
-            <td>{quantity} $</td>
-            <td>{minimumOrderQuantity} $</td>
-            <td>{price} </td>
+            <td>{quantity} </td>
+            <td>{minimumOrderQuantity} </td>
+            <td>{price} $ </td>
             <td>{description.slice(0, 15)}...</td>
             <td>
                 <Button variant="danger me-2" onClick={openModal}>

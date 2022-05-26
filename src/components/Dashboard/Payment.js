@@ -27,10 +27,10 @@ const Payment = () => {
 
     return (
         <div className="container">
-            <h5 className='text-center'>Your order details</h5>
+            <h5 className='text-center my-5'>Your order details & Payment</h5>
             <div className="row g-0 justify-content-center align-items-center">
                 <div className="col-12">
-                    <div className="card mb-3 shadow-lg" >
+                    <div className="card mb-3 shadow-lg transparent-bg " >
                         <div className="row g-0 justify-content-center align-items-center p-3 ">
                             <div className="col-md-4 text-center py-1">
                                 <img src={order.img} className="img-fluid rounded-start" alt="..." />

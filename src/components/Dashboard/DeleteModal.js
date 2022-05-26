@@ -4,8 +4,7 @@ import { toast } from 'react-toastify';
 
 const DeleteModal = ({ refetch, deletingOrder, setDeletingOrder, show, setShow }) => {
     const { _id } = deletingOrder;
-    console.log(_id);
-    console.log(deletingOrder);
+
     const handleDelete = () => {
         fetch(`http://localhost:5000/allOrders/${_id}`, {
             method: 'DELETE',
@@ -26,15 +25,12 @@ const DeleteModal = ({ refetch, deletingOrder, setDeletingOrder, show, setShow }
     return (
 
         <Modal show={show} onHide={() => setShow(false)}>
-            <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+            <Modal.Body>Are you sure delete this order?</Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={() => setShow(false)}>
+                <Button variant="dark" onClick={() => setShow(false)}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={handleDelete}>
+                <Button variant="danger" onClick={handleDelete}>
                     delete
                 </Button>
             </Modal.Footer>

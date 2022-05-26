@@ -36,17 +36,18 @@ const RowForOrder = ({ allOrder, index, refetch, setDeletingOrder, setShow }) =>
         <tr>
             <td>{index + 1}</td>
             <td>{userName}</td>
-            <td>{userEmail} $</td>
+            <td>{userEmail}</td>
             <td>{productName} </td>
-            <td>{price}</td>
+            <td>{price} $</td>
             <td>{orderQuantity}</td>
             <td>
-                {(price && !paid) && <>
-                    <button className='btn btn-dark me-1'>unpaid</button>
+                {(price && !paid) &&
+                    <div>
+                        <button className='btn btn-dark m-1'>unpaid</button>
+                        <button onClick={openModal} className='btn btn-danger'>delete</button>
+                    </div>
 
-                    <button onClick={openModal} className='btn btn-danger'>delete</button>
-
-                </>}
+                }
                 {(price && paid) && <button onClick={updateStatus} className='btn btn-dark'>{status}</button>}
             </td>
         </tr >

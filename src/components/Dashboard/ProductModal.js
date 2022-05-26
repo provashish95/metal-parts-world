@@ -25,15 +25,12 @@ const ProductModal = ({ refetch, deletingOrder, setDeletingOrder, show, setShow 
     return (
 
         <Modal show={show} onHide={() => setShow(false)}>
-            <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+            <Modal.Body>Are you sure delete this product?</Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={() => setShow(false)}>
-                    Close
+                <Button variant="dark" onClick={() => setShow(false)}>
+                    NO
                 </Button>
-                <Button variant="primary" onClick={handleDelete}>
+                <Button variant="danger" onClick={handleDelete}>
                     delete
                 </Button>
             </Modal.Footer>

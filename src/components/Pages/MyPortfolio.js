@@ -16,8 +16,8 @@ const MyPortfolio = () => {
                         <div className="col-sm-12 col-md-6 col-lg-6">
                             <div className=''>
                                 <p><span className='fw-bold'>Address:</span> Manikgonj, Dhaka</p>
-                                <p><span className='fw-bold'>Email:</span> provashishroy95@gmail.com <span> <i class="fa-solid fa-envelope"></i></span></p>
-                                <p><span className='fw-bold'>Phone:</span> (+88) 01632544810 <span><i class="fa-solid fa-phone-flip"></i></span></p>
+                                <p><span className='fw-bold'>Email:</span> provashishroy95@gmail.com <span> <i className="fa-solid fa-envelope"></i></span></p>
+                                <p><span className='fw-bold'>Phone:</span> (+88) 01632544810 <span><i className="fa-solid fa-phone-flip"></i></span></p>
                             </div>
                         </div>
                         <div className="col-sm-12 col-md-6 col-lg-6">

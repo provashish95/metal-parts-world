@@ -28,16 +28,13 @@ const ConfirmationModal = ({ refetch, deletingOrder, setDeletingOrder, show, set
     return (
 
         <Modal show={show} onHide={() => setShow(false)}>
-            <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+            <Modal.Body>Are you sure cancel this order ?</Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={() => setShow(false)}>
-                    Close
+                <Button variant="dark" onClick={() => setShow(false)}>
+                    No
                 </Button>
-                <Button variant="primary" onClick={handleDelete}>
-                    delete
+                <Button variant="danger" onClick={handleDelete}>
+                    Cancel
                 </Button>
             </Modal.Footer>
         </Modal>

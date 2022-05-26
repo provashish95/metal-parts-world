@@ -27,8 +27,8 @@ const TableRow = ({ order, index, setDeletingOrder, setShow }) => {
 
                 {(price && !paid) && <Link to={`/dashboard/payment/${_id}`} className='btn btn-dark'>Pay</Link>}
                 {(price && paid) && <>
-                    <p className='fw-bold'>Paid</p>
-                    <p className='my-0 py-0'>Transaction ID</p><small className="text-info"> {transactionId}</small>
+                    <p className='fw-bold my-0 py-0'>Paid</p>
+                    <p className='my-0 py-0'>Transaction ID</p><small > {transactionId}</small>
                 </>}
             </td>
         </tr >

@@ -18,7 +18,7 @@ const MakeAdmin = () => {
         <div className='container'>
             <div className="row my-5 ">
                 <div className="col ">
-                    <h5 className='text-center text-color mb-4 '>All Users :</h5>
+                    <h5 className='text-center text-color mb-4 '>All Users</h5>
                     <div className='table-responsive'>
                         <table className="table table-hover border border-1 border-dark text-center">
                             <thead className='text-color'>

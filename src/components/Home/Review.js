@@ -9,7 +9,7 @@ const Review = () => {
 
     return (
         <div className='container'>
-            <h4 className='text-center enchant-color mb-5'>REVIEWS</h4>
+            <h4 className='text-center enchant-color my-5'>REVIEWS</h4>
             <div className="row py-4 my-4 transparent-bg">
 
                 {

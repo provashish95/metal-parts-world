@@ -114,7 +114,7 @@ const CheckoutForm = ({ order }) => {
                         },
                     }}
                 />
-                <button className='btn btn-success  mt-3' type="submit" disabled={!stripe || !clientSecret}>
+                <button className='btn btn-dark  mt-3' type="submit" disabled={!stripe || !clientSecret}>
                     Pay
                 </button>
             </form>
@@ -124,7 +124,7 @@ const CheckoutForm = ({ order }) => {
             {
                 success ? <div className='text-success mt-4'>
                     <p>{success}</p>
-                    <p>Your transaction ID : <span className='text-info font-bold'>{transactionId}</span></p>
+                    <p>Your transaction ID : <span className='fw-bold'>{transactionId}</span></p>
                 </div> : ''
             }
         </>

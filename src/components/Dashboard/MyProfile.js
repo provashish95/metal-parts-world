@@ -56,50 +56,49 @@ const MyProfile = () => {
 
     return (
         <div className='container'>
-            <div className="row ">
+            <div className="row my-5">
                 <div className="col-sm-12 col-md-6 col-lg-6">
 
-                    <p className='text-center fw-bold'>Your Profile info</p>
+                    <h5 className='text-center mb-4'>Your Profile info</h5>
                     <label className="form-label">Your Name</label>
-                    <div className="mb-3">
-                        <input type="text" name="name" value={user?.displayName} className="w-100 rounded  p-1" readOnly disabled />
+                    <div className="mb-3 ">
+                        <input type="text" name="name" value={user?.displayName} className="w-100   p-1" readOnly disabled />
                     </div>
                     <label className="form-label">Your Email</label>
-                    <div className="mb-3">
-                        <input type="email" name="email" value={user?.email} className="w-100  p-1" readOnly disabled />
+                    <div className="mb-3 " >
+                        <input type="text" name="name" value={user?.email} className="w-100   p-1" readOnly disabled />
                     </div>
                     <label className="form-label">Phone</label>
-                    <div className="mb-3">
-                        <input type="text" name="phone" value={userProfile.phone} className="w-100   p-1" readOnly disabled />
+                    <div className="mb-3 ">
+                        <input type="text" name="name" value={userProfile.phone} className="w-100   p-1" readOnly disabled />
+                    </div>
+                    <label className="form-label"> Location (city/district)</label>
+                    <div className="mb-3 ">
+                        <input type="text" name="name" value={userProfile?.address} className="w-100   p-1" readOnly disabled />
+                    </div>
+                    <label className="form-label">Education</label>
+                    <div className="mb-3 ">
+                        <input type="text" name="name" value={userProfile?.education} className="w-100   p-1" readOnly disabled />
                     </div>
                     <label className="form-label"> Location (city/district)</label>
                     <div className="mb-3">
-                        <textarea value={userProfile?.address} className="w-100 " readOnly disabled ></textarea>
-                    </div>
-                    <label className="form-label">Education</label>
-                    <div className="mb-3">
-                        <textarea value={userProfile?.education} className="w-100 " readOnly disabled ></textarea>
-                    </div>
-                    <label className="form-label">Linkedin Profile url</label>
-                    <div className="mb-3">
-                        <input type="text" name="linkedin" value={userProfile?.linkedin} className="w-100   p-1" readOnly disabled />
+                        <input type="text" name="name" value={userProfile?.linkedin} className="w-100   p-1" readOnly disabled />
                     </div>
                     <label className="form-label">NID</label>
                     <div className="mb-3">
-                        <input type="text" name="nid" value={userProfile?.nid} className="w-100   p-1" readOnly disabled />
+                        <input type="text" name="name" value={userProfile?.nid} className="w-100   p-1" readOnly disabled />
                     </div>
                     <label className="form-label">Role</label>
                     <div className="mb-3">
-                        <input type="text" name="role" value={userProfile?.role} className="w-100   p-1" readOnly disabled />
+                        <input type="text" name="name" value={(userProfile?.role) ? userProfile?.role : 'N/A'} className="w-100   p-1" readOnly disabled />
                     </div>
-
                 </div>
                 <div className='col-sm-12 col-md-6 col-lg-6'>
                     <form onSubmit={handleUpdate}>
-                        <p className='text-center fw-bold'>Update Your Profile</p>
+                        <h5 className='text-center mb-4'>Update Your Profile</h5>
                         <label className="form-label">Your Name</label>
                         <div className="mb-3">
-                            <input type="text" name="name" value={user?.displayName} className="w-100 rounded  p-1" readOnly disabled />
+                            <input type="text" name="name" value={user?.displayName} className="w-100   p-1" readOnly disabled />
                         </div>
                         <label className="form-label">Your Email</label>
                         <div className="mb-3">

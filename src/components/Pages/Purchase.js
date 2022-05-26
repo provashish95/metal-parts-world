@@ -139,7 +139,7 @@ const Purchase = () => {
             <h5 className='text-center my-5'>Purchase Your Product</h5>
             <div className="row g-0 justify-content-center align-items-center">
                 <div className="col-12">
-                    <div className="card mb-3 shadow-lg" >
+                    <div className="card mb-3 shadow-lg secondary-color" >
                         <div className="row g-0 justify-content-center align-items-center p-3 ">
                             <div className="col-md-4 text-center py-5">
                                 <img src={img} className="img-fluid rounded-start" alt="..." />
@@ -148,7 +148,7 @@ const Purchase = () => {
                                 <div className="card-body">
                                     <h5 className="card-title">{name}</h5>
                                     <p className="card-text">{description}</p>
-                                    <p className="card-text">Price for 1 item: <small className="text-muted">{price}</small></p>
+                                    <p className="card-text">Price for 1 item: <small className="text-muted">{price} $</small></p>
                                     <p className="card-text">Available Quantity: <small className="text-muted">{quantity}</small></p>
                                     <p className="card-text">Minimum quantity: <small className="text-muted">{minimumOrderQuantity}</small></p>
                                 </div>
@@ -166,7 +166,7 @@ const Purchase = () => {
                             <p className='text-center'> <small >Minimum quantity will be {minimumOrderQuantity}</small></p>
                         </div>
                         <div className="mb-3 text-center">
-                            <input type="text" onChange={handleError} ref={quantityRef} value={count} className="w-50 mx-auto rounded text-center  p-1 " />
+                            <input type="text" onChange={handleError} ref={quantityRef} value={count} className="w-50 mx-auto  text-center  p-1 " />
                         </div>
                         <div className='text-center mb-4'>
                             <button onClick={handleIncrement} className='btn btn-dark me-2'>+</button>
@@ -175,20 +175,19 @@ const Purchase = () => {
                         <form onSubmit={handleOrder}>
                             <p className='text-center fw-bold'>Add your Info</p>
                             <div className="mb-3">
-                                <input type="text" ref={nameRef} name="name" value={user?.displayName} className="w-100 rounded  p-1" readOnly disabled />
+                                <input type="text" ref={nameRef} name="name" value={user?.displayName} className="w-100   p-1" readOnly disabled />
                             </div>
                             <div className="mb-3">
-                                <input type="email" ref={emailRef} name="email" value={user?.email} className="w-100 rounded p-1" readOnly disabled />
+                                <input type="email" ref={emailRef} name="email" value={user?.email} className="w-100  p-1" readOnly disabled />
                             </div>
                             <div className="mb-3">
-                                <input type="text" ref={phoneRef} name="phone" className="w-100 rounded  p-1" placeholder='Your Phone' required />
+                                <input type="text" ref={phoneRef} name="phone" className="w-100   p-1" placeholder='Your Phone' required />
                             </div>
                             <div className="mb-3">
-                                <textarea ref={addressRef} className="w-100 rounded" placeholder="Add Your Address" required></textarea>
+                                <textarea ref={addressRef} className="w-100 " placeholder="Add Your Address" required></textarea>
                             </div>
                             <button type="submit" className='btn btn-dark w-50 mx-auto d-block mb-5' disabled={isDisable}>Order Now</button>
                         </form>
-
                     </div>
                 </div>
             </div>

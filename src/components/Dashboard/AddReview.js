@@ -45,10 +45,10 @@ const AddReview = () => {
 
     return (
         <div className='container'>
-            <div className="row w-50 mx-auto">
+            <div className="row  my-5">
                 <div className="col-12">
-                    <form onSubmit={handleUpdate}>
-                        <p className='text-center fw-bold'>Add a review</p>
+                    <form onSubmit={handleUpdate} className="w-75 mx-auto" >
+                        <h5 className='text-center my-4'>Add  Review</h5>
                         <label className="form-label"> Write something (description)</label>
                         <div className="mb-3">
                             <textarea name="description" className="w-100 " placeholder='Description' required></textarea>

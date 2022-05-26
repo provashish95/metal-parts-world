@@ -9,32 +9,32 @@ const ReviewCard = ({ review }) => {
                 <p className="card-text"><span className='fw-bold'>Customer says,</span> <span className='text-muted'>{description.slice(0, 70)}...</span></p>
                 <p className="card-text"><span className=' me-1'>Ratting:</span>
 
-                    {starRatting === 1 && <i class="fas fa-star"></i>}
+                    {starRatting === 1 && <i className="fas fa-star"></i>}
                     {starRatting === 2 &&
                         <>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
                         </>}
                     {starRatting === 3 &&
                         <>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
                         </>}
                     {starRatting === 4 &&
                         <>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
                         </>}
                     {starRatting === 5 &&
                         <>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
                         </>}
 
                 </p>
