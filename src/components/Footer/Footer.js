@@ -24,7 +24,7 @@ const Footer = () => {
 
                     </div>
                     <div className="col-sm-12 col-md-6 col-lg-4 ">
-                        <p className='fw-bold mb-1'> <small >COMMUNITY</small></p>
+                        <p className='fw-bold mb-1'> <small >Provashish</small></p>
                         <p className='mb-0'><small>Community Center</small></p>
                         <p className='mb-0'><small>Support Center</small></p>
                         <p className='mb-0'><small>Help Center</small></p>
